@@ -1,0 +1,6 @@
+@iCanChallenge.API_HostAddress = http://localhost:5166
+
+GET {{iCanChallenge.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
