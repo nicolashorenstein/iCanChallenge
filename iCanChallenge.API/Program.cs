@@ -1,4 +1,6 @@
+using FluentValidation.AspNetCore;
 using iCanChallenge.Application.Students.Queries;
+using iCanChallenge.Application.Validators.Students;
 using iCanChallenge.Domain.Interfaces;
 using iCanChallenge.Infrastructure.Services;
 using MediatR;
@@ -13,6 +15,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IStudentService, StudentService>();
+
+builder.Services.AddFluentValidation(fv =>
+{
+    fv.RegisterValidatorsFromAssemblyContaining<GetStudentByIdValidator>();
+});
 
 builder.Services.AddMediatR(typeof(GetAllStudentsHandler).Assembly);
 var app = builder.Build();

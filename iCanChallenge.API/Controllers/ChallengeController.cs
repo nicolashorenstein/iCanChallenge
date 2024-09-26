@@ -1,5 +1,7 @@
+using iCanChallenge.Application.Students.Commands.Students;
 using iCanChallenge.Application.Students.Queries;
 using iCanChallenge.Application.Students.Responses;
+using iCanChallenge.Domain.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +11,7 @@ namespace iCanChallenge.API.Controllers
     [Route("[controller]")]
     public class ChallengeController : ControllerBase
     {
-       
+
         private readonly ILogger<ChallengeController> _logger;
         private readonly IMediator _mediator;
 
@@ -19,10 +21,28 @@ namespace iCanChallenge.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("api/GetStudents")]
+        [HttpGet("api/Students")]
         public async Task<StudentResponse> GetStudents()
         {
             return await _mediator.Send(new GetAllStudentsQuery());
+        }
+
+        [HttpGet("api/Students/{id}")]
+        public async Task<StudentResponse> GetStudentById(int id)
+        {
+            return await _mediator.Send(new GetStudentsByIdQuery
+            {
+                StudentId = id
+            });
+        }
+
+        [HttpPut("api/Exam")]
+        public async Task<BaseResult> UpdateExamn([FromBody] UpdateExamCommand command)
+        {
+            return await _mediator.Send(new UpdateExamQuery
+            {
+                Command = command
+            });
         }
     }
 }

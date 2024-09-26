@@ -1,8 +1,11 @@
 ﻿using iCanChallenge.Domain.Interfaces;
 using iCanChallenge.Domain.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Reflection;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,6 +73,31 @@ namespace iCanChallenge.Infrastructure.Services
             int randomSecond = random.Next(0, 60);
 
             return new DateTime(DateTime.Now.Year, 1, 1).AddDays(randomDay - 1).AddHours(randomHour).AddMinutes(randomMinute).AddSeconds(randomSecond);
+        }
+
+        public Student? GetStudentById(int id)
+        {
+            return _students.FirstOrDefault(c => c.StudentId == id);
+        }
+
+        public bool UpdateExam(int studentId, int examId, int score, DateTime dateTaken, bool? isPassed)
+        {
+            var student = _students.FirstOrDefault(c => c.StudentId == studentId);
+            var exam = student.ExamScores.FirstOrDefault(c => c.ExamId == examId);
+
+            var studentIndex = _students.IndexOf(student);
+            var examIndex = student.ExamScores.IndexOf(exam);
+
+            exam.Score = score;
+            exam.DateTaken = dateTaken;
+            exam.IsPassed = isPassed;
+
+            if (studentIndex != -1 && examIndex != -1)
+            {
+                _students[studentIndex].ExamScores[examIndex] = exam;
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -10,6 +10,6 @@ namespace iCanChallenge.Application.Students.Responses
 {
     public class StudentResponse : BaseResult
     {
-        public List<Student> Students { get; set; }
+        public List<Student> Students { get; set; } = new List<Student>();
     }
 }
