@@ -1,3 +1,8 @@
+using iCanChallenge.Application.Students.Queries;
+using iCanChallenge.Domain.Interfaces;
+using iCanChallenge.Infrastructure.Services;
+using MediatR;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +12,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton<IStudentService, StudentService>();
+
+builder.Services.AddMediatR(typeof(GetAllStudentsHandler).Assembly);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

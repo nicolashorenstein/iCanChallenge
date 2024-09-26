@@ -1,3 +1,6 @@
+using iCanChallenge.Application.Students.Queries;
+using iCanChallenge.Application.Students.Responses;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iCanChallenge.API.Controllers
@@ -8,16 +11,18 @@ namespace iCanChallenge.API.Controllers
     {
        
         private readonly ILogger<ChallengeController> _logger;
+        private readonly IMediator _mediator;
 
-        public ChallengeController(ILogger<ChallengeController> logger)
+        public ChallengeController(ILogger<ChallengeController> logger, IMediator mediator)
         {
             _logger = logger;
+            _mediator = mediator;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public async Task<IActionResult> Get()
+        [HttpGet("api/GetStudents")]
+        public async Task<StudentResponse> GetStudents()
         {
-            return Ok();
+            return await _mediator.Send(new GetAllStudentsQuery());
         }
     }
 }

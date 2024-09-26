@@ -7,7 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\iCanChallenge.Application\iCanChallenge.Application.csproj" />
+    <ProjectReference Include="..\iCanChallenge.Domain\iCanChallenge.Domain.csproj" />
+    <ProjectReference Include="..\iCanChallenge.Infrastructure\iCanChallenge.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
