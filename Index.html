@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        iCan  
+        Students list
+    </title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="service.js"></script>
+</head>
+
+<body>
+    <div class="sidebar">
+        <ul>
+            <li><a href="Index.html">Students</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <h1>Welcome iCan Code Challenge</h1>
+        <p>Here you can find the list of students loaded in memory</p>
+        <br>
+        <div class="loadingContent" id="loadingContentDiv">
+            <p><b>Getting students from server, plase wait...</b></p>
+        </div>
+        <div class="hidden-div" id="studentsTableDiv">
+            <table id="studentsTable">
+                <thead>
+                    <tr>
+                        <th>Student Id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            console.log("JQuery is ready!")
+
+            console.log("Fetching students!")
+            setTimeout(GetStudents, 3000);
+        });
+
+        setTimeout(function () {
+            //function created just for generating a delay
+        }, 3000);
+
+
+        $(document).on('click', '.custom-button', function () {
+            const studentId = $(this).data('id'); // Get the student ID from the button's data attribute
+            const redirectUrl = `StudentDetail.html?studentId=${studentId}`; // Construct the URL with the query parameter
+            window.location.href = redirectUrl; // Redirect to the new page
+        });
+    </script>
+
+</body>
+
+</html>

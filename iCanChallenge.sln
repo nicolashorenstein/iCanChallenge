@@ -6,14 +6,27 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{3CD5EBB0-F8D3-4ABB-B33E-102DAC0C3F16}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{7A6D077E-F423-4096-AAB5-ADBD5C70E6C8}"
+	ProjectSection(SolutionItems) = preProject
+		Index.html = Index.html
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iCanChallenge.API", "iCanChallenge.API\iCanChallenge.API.csproj", "{87E0A52E-9725-4C69-B057-BB5C10D359C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iCanChallenge.Application", "iCanChallenge.Application\iCanChallenge.Application.csproj", "{51719F29-CCC8-4696-A6A1-4EF28CA4326A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iCanChallenge.Application", "iCanChallenge.Application\iCanChallenge.Application.csproj", "{51719F29-CCC8-4696-A6A1-4EF28CA4326A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iCanChallenge.Domain", "iCanChallenge.Domain\iCanChallenge.Domain.csproj", "{B902A081-497E-4D60-9AFD-B5EF68B8058E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iCanChallenge.Domain", "iCanChallenge.Domain\iCanChallenge.Domain.csproj", "{B902A081-497E-4D60-9AFD-B5EF68B8058E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iCanChallenge.Infrastructure", "iCanChallenge.Infrastructure\iCanChallenge.Infrastructure.csproj", "{D98A4CB6-C48A-4C84-B796-5FDCE5648C62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iCanChallenge.Infrastructure", "iCanChallenge.Infrastructure\iCanChallenge.Infrastructure.csproj", "{D98A4CB6-C48A-4C84-B796-5FDCE5648C62}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{8EDBA96E-F413-4EBB-A31C-A5F191D21D3C}"
+	ProjectSection(SolutionItems) = preProject
+		service.js = service.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "css", "css", "{3D19E0FE-8056-4966-A426-9B926AF488BD}"
+	ProjectSection(SolutionItems) = preProject
+		style.css = style.css
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +59,8 @@ Global
 		{51719F29-CCC8-4696-A6A1-4EF28CA4326A} = {3CD5EBB0-F8D3-4ABB-B33E-102DAC0C3F16}
 		{B902A081-497E-4D60-9AFD-B5EF68B8058E} = {3CD5EBB0-F8D3-4ABB-B33E-102DAC0C3F16}
 		{D98A4CB6-C48A-4C84-B796-5FDCE5648C62} = {3CD5EBB0-F8D3-4ABB-B33E-102DAC0C3F16}
+		{8EDBA96E-F413-4EBB-A31C-A5F191D21D3C} = {7A6D077E-F423-4096-AAB5-ADBD5C70E6C8}
+		{3D19E0FE-8056-4966-A426-9B926AF488BD} = {7A6D077E-F423-4096-AAB5-ADBD5C70E6C8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {98B75541-CCD8-4E13-B49C-351A99D5C9AE}

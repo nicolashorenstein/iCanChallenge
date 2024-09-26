@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        iCan  
+        Student Detail
+    </title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="service.js"></script>
+</head>
+
+<body>
+    <div class="sidebar">
+        <ul>
+            <li><a href="Index.html">Students</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <h1>Welcome iCan Code Challenge</h1>
+        <p>Here you can find the detail of the specific student</p>
+        <br>
+        <div class="loadingContent" id="loadingContentDiv">
+            <p><b>Getting details from server, plase wait...</b></p>
+        </div>
+        <div class="hidden-div" id="studentDetailsDiv">
+            <h1>Student Details</h1>
+            <div class="detail-card">
+                <label for="studentId">Student ID:</label>
+                <span id="studentId" class="data-label"></span>
+            </div>
+            <div class="detail-card">
+                <label for="firstName">First Name:</label>
+                <span id="firstName" class="data-label"></span>
+            </div>
+            <div class="detail-card">
+                <label for="lastName">Last Name:</label>
+                <span id="lastName" class="data-label"></span>
+            </div>
+
+            <h2>Exams</h2>
+            <div id="examList" class="exam-list">
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            console.log("JQuery is ready!")
+            const studentId = getQueryParam('studentId');
+            console.log("Getting details!")
+            setTimeout(GetStudentById(studentId), 3000);
+        });
+
+        setTimeout(function () {
+            //function created just for generating a delay
+        }, 3000);
+
+
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+    </script>
+
+</body>
+
+</html>
