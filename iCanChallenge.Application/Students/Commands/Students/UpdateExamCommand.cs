@@ -12,7 +12,6 @@ namespace iCanChallenge.Application.Students.Commands.Students
         public int StudentId { get; set; }
         public int ExamId { get; set; }
         public DateTime DateTaken { get; set; }
-        [Range(0, 100)]
         public int Score { get; set; }
         public bool? IsPassed { get; set;}
     }

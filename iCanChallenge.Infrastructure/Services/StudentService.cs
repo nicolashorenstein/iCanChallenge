@@ -33,7 +33,7 @@ namespace iCanChallenge.Infrastructure.Services
             {
                 _students.Add(new Student
                 {
-                    StudentId = i,
+                    StudentId = random.Next(10000, 100000),
                     FirstName = $"Name {i}",
                     LastName = $"LastName {i}",
                     ExamScores = GenerateExams()

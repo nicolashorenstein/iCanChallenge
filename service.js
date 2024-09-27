@@ -5,9 +5,9 @@ function GetStudents() {
         success: function (data) {
             console.log("Got a response from server");
             if (data.ok) {
-                $("#loadingContentDiv").addClass("hidden-div");
-                $("#studentsTableDiv").removeClass("hidden-div");
-                LoadStudentsTable(data);
+                $("#loadingContentDiv").addClass("hidden-div")
+                $("#studentsTableDiv").removeClass("hidden-div")
+                LoadStudentsTable(data)
             }
             else {
 
@@ -17,14 +17,14 @@ function GetStudents() {
         },
         error: function (xhr, status, error) {
             // Handle the error response here
-            console.error("Error:", error);
+            console.error("Error:", error)
         }
     });
 }
 
 function LoadStudentsTable(data) {
     const students = data.students; // Assuming data.students is the array
-    const tbody = $('#studentsTable tbody');
+    const tbody = $('#studentsTable tbody')
 
     // Clear existing rows
     tbody.empty();
@@ -40,7 +40,7 @@ function LoadStudentsTable(data) {
                 </td>
             </tr>
         `;
-        tbody.append(row);
+        tbody.append(row)
     });
 }
 
@@ -53,9 +53,9 @@ function GetStudentById(id) {
             if (data.ok) {
                 // Handle the successful response data here
                 console.log(data);
-                $("#loadingContentDiv").addClass("hidden-div");
-                $("#studentDetailsDiv").removeClass("hidden-div");
-                LoadStudentDetails(data);
+                $("#loadingContentDiv").addClass("hidden-div")
+                $("#studentDetailsDiv").removeClass("hidden-div")
+                LoadStudentDetails(data)
             }
             else {
 
@@ -64,21 +64,21 @@ function GetStudentById(id) {
         },
         error: function (xhr, status, error) {
             // Handle the error response here
-            console.error("Error:", error);
+            console.error("Error:", error)
         }
     });
 }
 
 function LoadStudentDetails(data) {
-    const student = data.students[0];
+    const student = data.students[0]
 
-    $('#studentId').text(student.studentId);
-    $('#firstName').text(student.firstName);
-    $('#lastName').text(student.lastName);
+    $('#studentId').text(student.studentId)
+    $('#firstName').text(student.firstName)
+    $('#lastName').text(student.lastName)
 
     student.examScores.forEach(function (exam) {
         // Extract just the date part (YYYY-MM-DD)
-        const dateOnly = exam.dateTaken.split('T')[0];
+        const dateOnly = exam.dateTaken.split('T')[0]
 
         const card = `
         <div class="exam-card">
@@ -103,8 +103,20 @@ function LoadStudentDetails(data) {
             <button class="custom-button update-btn" data-id="${exam.examId}">Update</button>
         </div>
     `;
-        $('#examList').append(card);
+        $('#examList').append(card)
     });
+}
+
+function parseIsPassed(value) {
+    if (value === "true") {
+        return true
+    } else if (value === "false") {
+        return false
+    } else if (value === "null") {
+        return null
+    }
+    // Optionally handle unexpected values
+    throw new Error(`Unexpected value: ${value}`)
 }
 
 function UpdateExam(studentId, examId, dateTaken, score, isPassed) {
@@ -116,19 +128,53 @@ function UpdateExam(studentId, examId, dateTaken, score, isPassed) {
         isPassed: isPassed
     };
 
-    $.ajax({
-        url: `https://localhost:7156/Challenge/api/Exam`,
-        type: 'PUT',
-        contentType: 'application/json',
-        data: JSON.stringify(examData),
-        success: function (response) {
-            console.log('Exam updated successfully:', response);
-            alert('Exam updated successfully!');
-        },
-        error: function (xhr, status, error) {
-            console.error('Error updating exam:', error);
-            alert('Failed to update exam. Please try again.');
-        }
-    });
+    if (ValidateUpdateCommand(examData)) {
+        $.ajax({
+            url: `https://localhost:7156/Challenge/api/Exam`,
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(examData),
+            success: function (response) {
+                console.log('Exam updated successfully:', response)
+                alert('Exam updated successfully!')
+            },
+            error: function (xhr, status, error) {
+                console.error('Error updating exam:', error)
+                alert('Failed to update exam. Please try again.')
+            }
+        });
+    }
+    else {
+        alert("Please check the data you want to update.")
+    }
+
+}
+
+function ValidateUpdateCommand(examData) {
+    // Validate input
+    if (!isValidExamData(examData)) {
+        return false;
+    }
+
+    // Check score range
+    if (!isValidScore(examData.score)) {
+        return false;
+    }
+
+    // Check if dateTaken is provided
+    if (!examData.dateTaken) {
+        return false;
+    }
+
+    return true;
+}
+
+function isValidExamData(examData) {
+    // Ensure that data is an object and has the required properties
+    return examData && typeof examData === 'object' && 'score' && 'dateTaken' && 'studentId' && 'examId' in examData
+}
+
+function isValidScore(score) {
+    return Number.isInteger(score) && score >= 0 && score <= 100;
 }
 

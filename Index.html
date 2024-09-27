@@ -49,18 +49,18 @@
             console.log("JQuery is ready!")
 
             console.log("Fetching students!")
-            setTimeout(GetStudents, 3000);
+            setTimeout(GetStudents, 3000)
         });
 
         setTimeout(function () {
             //function created just for generating a delay
-        }, 3000);
+        }, 3000)
 
 
         $(document).on('click', '.custom-button', function () {
-            const studentId = $(this).data('id'); // Get the student ID from the button's data attribute
-            const redirectUrl = `StudentDetail.html?studentId=${studentId}`; // Construct the URL with the query parameter
-            window.location.href = redirectUrl; // Redirect to the new page
+            const studentId = $(this).data('id')// Get the student ID from the button's data attribute
+            const redirectUrl = `StudentDetail.html?studentId=${studentId}` // Construct the URL with the query parameter
+            window.location.href = redirectUrl // Redirect to the new page
         });
     </script>
 </body>

@@ -53,9 +53,9 @@
     <script>
         $(document).ready(function () {
             console.log("JQuery is ready!")
-            const studentId = getQueryParam('studentId');
+            const studentId = getQueryParam('studentId')
             console.log("Getting details!")
-            setTimeout(GetStudentById(studentId), 3000);
+            setTimeout(GetStudentById(studentId), 3000)
         });
 
         setTimeout(function () {
@@ -64,18 +64,20 @@
 
 
         function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
+            const urlParams = new URLSearchParams(window.location.search)
+            return urlParams.get(param)
         }
 
         $(document).on('click', '.update-btn', function () {
             const examId = $(this).data('id');
-            const dateTaken = $(`#dateTaken-${examId}`).val();
+            const dateTaken = $(`#dateTaken-${examId}`).val()
             const score = $(`#score-${examId}`).val();
-            const isPassed = $(`#isPassed-${examId}`).val() === 'true';
+            const isPassedValue = $(`#isPassed-${examId}`).val()
+         
+            const isPassed = parseIsPassed(isPassedValue);
 
-            UpdateExam(getQueryParam('studentId'), examId, dateTaken, score, isPassed);
-        });
+            UpdateExam(getQueryParam('studentId'), examId, dateTaken, score, isPassed)
+        })
     </script>
 </body>
 

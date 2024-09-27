@@ -12,7 +12,6 @@ namespace iCanChallenge.Domain.Models
         public int ExamId { get; set; }
         public string ExamName { get; set; }
         public DateTime DateTaken { get; set; }
-        [Range(0, 100)]
         public int Score { get; set; }
         public bool? IsPassed { get; set; } = null;
     }
