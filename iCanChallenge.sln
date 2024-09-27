@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{7A6D077E-F423-4096-AAB5-ADBD5C70E6C8}"
 	ProjectSection(SolutionItems) = preProject
 		Index.html = Index.html
+		StudentDetail.html = StudentDetail.html
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iCanChallenge.API", "iCanChallenge.API\iCanChallenge.API.csproj", "{87E0A52E-9725-4C69-B057-BB5C10D359C6}"

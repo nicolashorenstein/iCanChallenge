@@ -44,7 +44,6 @@ function LoadStudentsTable(data) {
     });
 }
 
-
 function GetStudentById(id) {
     $.ajax({
         url: `https://localhost:7156/Challenge/api/Students/${id}`,
@@ -101,10 +100,35 @@ function LoadStudentDetails(data) {
                     <option value="false" ${exam.isPassed === false ? 'selected' : ''}>No</option>
                 </select>
             </p>
-            <button class="custom-button" data-id="${exam.examId}">Update</button>
+            <button class="custom-button update-btn" data-id="${exam.examId}">Update</button>
         </div>
     `;
         $('#examList').append(card);
+    });
+}
+
+function UpdateExam(studentId, examId, dateTaken, score, isPassed) {
+    const examData = {
+        studentId: parseInt(studentId, 10),
+        examId: parseInt(examId, 10),
+        dateTaken: dateTaken,
+        score: parseInt(score, 10),
+        isPassed: isPassed
+    };
+
+    $.ajax({
+        url: `https://localhost:7156/Challenge/api/Exam`,
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify(examData),
+        success: function (response) {
+            console.log('Exam updated successfully:', response);
+            alert('Exam updated successfully!');
+        },
+        error: function (xhr, status, error) {
+            console.error('Error updating exam:', error);
+            alert('Failed to update exam. Please try again.');
+        }
     });
 }
 

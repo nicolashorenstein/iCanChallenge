@@ -45,7 +45,7 @@
 
             <h2>Exams</h2>
             <div id="examList" class="exam-list">
-                
+
             </div>
         </div>
     </div>
@@ -67,8 +67,16 @@
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
         }
-    </script>
 
+        $(document).on('click', '.update-btn', function () {
+            const examId = $(this).data('id');
+            const dateTaken = $(`#dateTaken-${examId}`).val();
+            const score = $(`#score-${examId}`).val();
+            const isPassed = $(`#isPassed-${examId}`).val() === 'true';
+
+            UpdateExam(getQueryParam('studentId'), examId, dateTaken, score, isPassed);
+        });
+    </script>
 </body>
 
 </html>
