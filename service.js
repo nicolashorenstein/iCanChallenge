@@ -10,13 +10,11 @@ function GetStudents() {
                 LoadStudentsTable(data)
             }
             else {
-
+                alert(data.error)
+                console.log(data.error);
             }
-            // Handle the successful response data here
-            console.log(data);
         },
         error: function (xhr, status, error) {
-            // Handle the error response here
             console.error("Error:", error)
         }
     });
@@ -58,7 +56,8 @@ function GetStudentById(id) {
                 LoadStudentDetails(data)
             }
             else {
-
+                alert(data.error)
+                console.log(data.error);
             }
 
         },
@@ -135,8 +134,14 @@ function UpdateExam(studentId, examId, dateTaken, score, isPassed) {
             contentType: 'application/json',
             data: JSON.stringify(examData),
             success: function (response) {
-                console.log('Exam updated successfully:', response)
-                alert('Exam updated successfully!')
+                if(response.ok){
+                    console.log('Exam updated successfully:', response)
+                    alert('Exam updated successfully!')
+                }
+                else{
+                    alert(response.error)
+                    console.log(response.error);
+                }
             },
             error: function (xhr, status, error) {
                 console.error('Error updating exam:', error)

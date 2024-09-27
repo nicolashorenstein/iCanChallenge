@@ -15,11 +15,11 @@ namespace iCanChallenge.Application.Students.Queries
 {
     public class UpdateExamHandler : IRequestHandler<UpdateExamQuery, BaseResult>
     {
-        private readonly IStudentService _studentService;
+        private readonly IChallengeService _challengeService;
         private readonly IValidator<UpdateExamQuery> _validator;
-        public UpdateExamHandler(IStudentService studentService, IValidator<UpdateExamQuery> validator)
+        public UpdateExamHandler(IChallengeService challengeService, IValidator<UpdateExamQuery> validator)
         {
-            _studentService = studentService;
+            _challengeService = challengeService;
             _validator = validator;
         }
 
@@ -36,7 +36,15 @@ namespace iCanChallenge.Application.Students.Queries
             }
             try
             {
-                var exam = (_studentService.GetStudentById(request.Command.StudentId)).ExamScores.FirstOrDefault(c=>c.ExamId == request.Command.ExamId);
+                var student = _challengeService.GetStudentById(request.Command.StudentId);
+
+                if(student == null)
+                {
+                    result.SetError("Student not found", HttpStatusCode.InternalServerError);
+                    return result;
+                }
+
+                var exam = student.ExamScores.FirstOrDefault(c=>c.ExamId == request.Command.ExamId);
                 if (exam == null)
                 {
                     result.SetError("Exam not found", HttpStatusCode.NotFound);
@@ -44,7 +52,7 @@ namespace iCanChallenge.Application.Students.Queries
                 }
                 else
                 {
-                    var updateResult = _studentService.UpdateExam(request.Command.StudentId, request.Command.ExamId, request.Command.Score,request.Command.DateTaken, request.Command.IsPassed);
+                    var updateResult = _challengeService.UpdateExam(request.Command.StudentId, request.Command.ExamId, request.Command.Score,request.Command.DateTaken, request.Command.IsPassed);
                     if (updateResult)
                     {
                         return result;

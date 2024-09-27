@@ -14,7 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IStudentService, StudentService>();
+builder.Services.AddSingleton<IChallengeService, ChallengeService>();
 
 builder.Services.AddFluentValidation(fv =>
 {

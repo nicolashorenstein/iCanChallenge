@@ -12,12 +12,10 @@ namespace iCanChallenge.API.Controllers
     public class ChallengeController : ControllerBase
     {
 
-        private readonly ILogger<ChallengeController> _logger;
         private readonly IMediator _mediator;
 
-        public ChallengeController(ILogger<ChallengeController> logger, IMediator mediator)
+        public ChallengeController(IMediator mediator)
         {
-            _logger = logger;
             _mediator = mediator;
         }
 

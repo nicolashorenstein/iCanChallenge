@@ -14,11 +14,11 @@ namespace iCanChallenge.Application.Students.Queries
 {
     public class GetStudentByIdHandler : IRequestHandler<GetStudentsByIdQuery, StudentResponse>
     {
-        private readonly IStudentService _studentService;
+        private readonly IChallengeService _challengeService;
         private readonly IValidator<GetStudentsByIdQuery> _validator;
-        public GetStudentByIdHandler(IStudentService studentService, IValidator<GetStudentsByIdQuery> validator)
+        public GetStudentByIdHandler(IChallengeService challengeService, IValidator<GetStudentsByIdQuery> validator)
         {
-            _studentService = studentService;
+            _challengeService = challengeService;
             _validator = validator;
         }
 
@@ -35,7 +35,7 @@ namespace iCanChallenge.Application.Students.Queries
             }
             try
             {
-                var student = _studentService.GetStudentById(request.StudentId);
+                var student = _challengeService.GetStudentById(request.StudentId);
                 if (student != null)
                 {
                     result.Students.Add(student);

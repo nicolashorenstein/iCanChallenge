@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace iCanChallenge.Infrastructure.Services
 {
-    public class StudentService : IStudentService
+    public class ChallengeService : IChallengeService
     {
         private readonly List<Student> _students = new List<Student>();
         private Random random;
-        public StudentService()
+        public ChallengeService()
         {
             random = new Random();
             LoadStudents();
@@ -29,15 +29,22 @@ namespace iCanChallenge.Infrastructure.Services
 
         private void LoadStudents()
         {
-            for (int i = 1; i <= 10; i++)
+            try
             {
-                _students.Add(new Student
+                for (int i = 1; i <= 10; i++)
                 {
-                    StudentId = random.Next(10000, 100000),
-                    FirstName = $"Name {i}",
-                    LastName = $"LastName {i}",
-                    ExamScores = GenerateExams()
-                });
+                    _students.Add(new Student
+                    {
+                        StudentId = random.Next(10000, 100000),
+                        FirstName = $"Name {i}",
+                        LastName = $"LastName {i}",
+                        ExamScores = GenerateExams()
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
 
@@ -45,7 +52,7 @@ namespace iCanChallenge.Infrastructure.Services
         {
             var result = new List<ExamScore>();
 
-            //Here, I considered that each student have 6 exams assigned
+            //Here, I consider that each student has 6 exams assigned.
             for (int i = 1; i<=6; i++)
             {
                 var studentTookExam = random.Next(0, 2) == 1;
@@ -56,7 +63,7 @@ namespace iCanChallenge.Infrastructure.Services
                     ExamId = random.Next(100, 1000),
                     ExamName = $"Exam {i}",
                     DateTaken = GenerateRandomDate(),
-                    Score = studentTookExam ? score : 0, //If student took exam, the score is generated, if not, the score will be 0
+                    Score = studentTookExam ? score : 0, //If a student takes a exam, a score is generated. If not, the score will be 0.
                     IsPassed = studentTookExam ? (score >= 60 ? true : false) : null
                 });
             }

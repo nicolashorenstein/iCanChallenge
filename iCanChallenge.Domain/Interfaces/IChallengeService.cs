@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace iCanChallenge.Domain.Interfaces
 {
-    public interface IStudentService
+    public interface IChallengeService
     {
         public List<Student> GetStudents();
         public Student? GetStudentById(int id);

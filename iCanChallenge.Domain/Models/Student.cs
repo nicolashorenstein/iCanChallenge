@@ -9,8 +9,16 @@ namespace iCanChallenge.Domain.Models
 {
     public class Student
     {
-        [Range(0, 99999, ErrorMessage = "StudentId must be between 0 and 99999.")]
-        public int StudentId { get; set; }
+        private int _studentId;
+        public int StudentId { get => _studentId; set
+            {
+                if (value < 10000 || value > 99999)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(StudentId), "StudentId must be a 5-digit integer.");
+                }
+                _studentId = value;
+            }
+        }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public List<ExamScore> ExamScores { get; set; } = new List<ExamScore>();
